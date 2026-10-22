@@ -1,46 +1,202 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Courier; -webkit-text-stroke: #000000}
-    span.s1 {font-kerning: none}
-    span.Apple-tab-span {white-space:pre}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unity × Meshy: production-ready 3D, generated</title>
+<meta name="description" content="A partnership pitch: Unity's engine with Meshy's AI 3D asset generation, for game developers and film creators.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --clay:#e6e8ea; --clay-2:#d6d9dd; --paper:#f4f5f6;
+  --ink:#171a1f; --ink-2:#4a515b;
+  --wire:#2e4bff; --gizmo:#f2b632;
+  --head:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme:dark){
+  :root{--clay:#14171b; --clay-2:#262b32; --paper:#1c2026; --ink:#eceef0; --ink-2:#a2a9b3; --wire:#7d92ff}
+}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:var(--clay);color:var(--ink);font:400 clamp(1rem,1.5vw,1.25rem)/1.55 var(--body);overflow:hidden}
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;padding:clamp(1.5rem,6vh,4rem) clamp(1.25rem,7vw,7rem) 5.5rem;display:flex;flex-direction:column;justify-content:center;overflow-y:auto;opacity:0;visibility:hidden;transform:translateX(24px);transition:opacity .35s,transform .35s,visibility 0s .35s}
+.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .35s,transform .35s}
+.slide.past{transform:translateX(-24px)}
+h1,h2,h3{font-family:var(--head);margin:0;line-height:1.02;letter-spacing:-.02em}
+h1{font-size:clamp(2.6rem,8vw,6.5rem);font-weight:700}
+h2{font-size:clamp(2rem,4.8vw,3.9rem);font-weight:700;max-width:18ch}
+h3{font-size:clamp(1.15rem,1.8vw,1.5rem);font-weight:500;letter-spacing:-.01em;line-height:1.2}
+p{margin:0;max-width:56ch;color:var(--ink-2)}
+.lede{font-size:clamp(1.1rem,1.9vw,1.6rem);line-height:1.4;color:var(--ink);max-width:34ch;margin-top:1.25rem}
+.x{color:var(--wire);font-weight:500}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:clamp(1.25rem,3vw,3rem);margin-top:clamp(1.5rem,5vh,3.5rem)}
+.col{border-top:3px solid var(--ink);padding-top:1rem}
+.col h3{margin-bottom:.5rem}
+.col.w{border-color:var(--wire)}.col.g{border-color:var(--gizmo)}
+
+/* title slide */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:2rem}
+.hero svg{width:100%;max-width:30rem;justify-self:center;overflow:visible}
+.wire{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round}
+.dot{fill:var(--paper);stroke:var(--wire);stroke-width:2}
+.f{opacity:0}
+.on .f{animation:shade .9s ease-out forwards;animation-delay:calc(.5s + var(--i)*.14s)}
+@keyframes shade{to{opacity:1}}
+
+/* partnership diagram */
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(1rem,3vw,2.5rem);align-items:stretch;margin-top:clamp(1.5rem,5vh,3rem)}
+.box{background:var(--paper);border-radius:6px;padding:clamp(1.1rem,2.4vw,2rem)}
+.box h3{font-size:clamp(1.5rem,2.8vw,2.4rem);margin-bottom:.6rem;color:var(--ink)}
+.plus{align-self:center;font:700 clamp(2rem,4vw,3.5rem)/1 var(--head);color:var(--wire)}
+.result{margin-top:1.5rem;padding:1rem 0 0;border-top:3px solid var(--wire);color:var(--ink);font-size:clamp(1.1rem,1.9vw,1.5rem);line-height:1.35;max-width:40ch}
+
+/* workflow */
+.steps{list-style:none;margin:clamp(1.5rem,5vh,3.5rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1.25rem;counter-reset:s}
+.steps li{counter-increment:s;background:var(--paper);border-radius:6px;padding:1.1rem 1.1rem 1.3rem}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--ink);color:var(--clay);font:500 .95rem var(--head);margin-bottom:.9rem}
+.steps h3{margin-bottom:.4rem}
+.steps p{font-size:.95em}
+
+.note{margin-top:2rem;font-size:.8em;color:var(--ink-2)}
+.contact{margin-top:2rem;font-size:clamp(1.1rem,1.8vw,1.4rem);color:var(--ink)}
+
+/* chrome */
+.bar{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;gap:1rem;padding:.9rem clamp(1.25rem,7vw,7rem);background:linear-gradient(transparent,var(--clay) 60%)}
+.prog{flex:1;height:3px;background:var(--clay-2);border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--wire);transition:width .35s}
+.count{font:500 .9rem var(--head);color:var(--ink-2);min-width:3.5rem;text-align:right}
+.bar button{appearance:none;border:0;background:var(--paper);color:var(--ink);width:2.5rem;height:2.5rem;border-radius:50%;font:500 1.1rem var(--head);cursor:pointer}
+.bar button:hover{background:var(--clay-2)}
+:focus-visible{outline:3px solid var(--wire);outline-offset:2px}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr}.hero svg{max-width:14rem;order:-1;justify-self:start}
+  .pair{grid-template-columns:1fr}.plus{justify-self:start}
+}
+@media (prefers-reduced-motion:reduce){
+  .slide,.slide.on,.prog i{transition:none;transform:none}
+  .f{opacity:1}.on .f{animation:none}
+}
+</style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1">&lt;html lang="en"&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1">&lt;head&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>&lt;meta charset="UTF-8"&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>&lt;title&gt;Meshy.AI + Unity&lt;/title&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>&lt;style&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>body {<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>margin: 0;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>padding: 0;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>background-color: #000000;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>color: #ffffff;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>display: flex;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>justify-content: center;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>align-items: center;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>height: 100vh;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>h1 {<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>font-size: 3rem;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>font-weight: 600;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>letter-spacing: -0.05em;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>&lt;/style&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1">&lt;body&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-tab-span">	</span>&lt;h1&gt;Meshy.AI + Unity&lt;/h1&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+<main class="deck" id="deck" aria-live="polite">
+
+<section class="slide" aria-label="Title">
+  <div class="hero">
+    <div>
+      <h1>Production-ready 3D, generated.</h1>
+      <p class="lede">Unity <span class="x">×</span> Meshy.ai: best-in-class 3D art assets for game developers and film creators.</p>
+    </div>
+    <svg viewBox="0 0 400 400" role="img" aria-label="A low-poly cube that fills in from wireframe to shaded model">
+      <g>
+        <polygon class="f" style="--i:0" fill="#e9edff" points="200,60 320,130 200,200"/>
+        <polygon class="f" style="--i:1" fill="#c9d2ff" points="200,60 200,200 80,130"/>
+        <polygon class="f" style="--i:2" fill="#8da0ff" points="80,130 200,200 80,270"/>
+        <polygon class="f" style="--i:3" fill="#5a73ff" points="80,270 200,200 200,340"/>
+        <polygon class="f" style="--i:4" fill="#2e4bff" points="200,340 200,200 320,270"/>
+        <polygon class="f" style="--i:5" fill="#f2b632" points="320,270 200,200 320,130"/>
+      </g>
+      <g class="wire">
+        <polygon points="200,60 320,130 320,270 200,340 80,270 80,130"/>
+        <polyline points="80,130 200,200 320,130"/><line x1="200" y1="200" x2="200" y2="340"/>
+        <line x1="200" y1="60" x2="200" y2="200"/><line x1="320" y1="130" x2="200" y2="200"/>
+        <line x1="320" y1="270" x2="200" y2="200"/><line x1="80" y1="270" x2="200" y2="200"/>
+      </g>
+      <g class="dot"><circle cx="200" cy="60" r="5"/><circle cx="320" cy="130" r="5"/><circle cx="320" cy="270" r="5"/><circle cx="200" cy="340" r="5"/><circle cx="80" cy="270" r="5"/><circle cx="80" cy="130" r="5"/><circle cx="200" cy="200" r="5"/></g>
+    </svg>
+  </div>
+</section>
+
+<section class="slide" aria-label="The gap">
+  <h2>Generative AI can make 3D. It can't yet make it ready to ship.</h2>
+  <div class="cols">
+    <div class="col"><h3>Looks right, builds wrong</h3><p>Raw AI meshes often arrive with messy topology and unusable surfaces, so artists rebuild them by hand.</p></div>
+    <div class="col"><h3>Outside the pipeline</h3><p>Assets are generated away from the engine, then converted, retextured and fixed before anyone can use them.</p></div>
+    <div class="col"><h3>Quality bar is high</h3><p>Games and film need consistent, performant, art-directed assets. Novelty isn't enough.</p></div>
+  </div>
+</section>
+
+<section class="slide" aria-label="The partnership">
+  <h2>Two strengths, one pipeline.</h2>
+  <div class="pair">
+    <div class="box"><h3>Meshy.ai</h3><p>Generates high-quality 3D art assets from text and images, fast.</p></div>
+    <div class="plus" aria-hidden="true">+</div>
+    <div class="box"><h3>Unity</h3><p>The game engine where assets are placed, lit, animated, optimized and shipped.</p></div>
+  </div>
+  <p class="result">Best-in-class 3D assets, generated and used in the same place.</p>
+</section>
+
+<section class="slide" aria-label="How it works">
+  <h2>From idea to in-scene.</h2>
+  <ol class="steps">
+    <li><h3>Describe it</h3><p>Write a prompt or upload a reference image.</p></li>
+    <li><h3>Generate in Meshy</h3><p>Get a textured 3D asset built to a production standard.</p></li>
+    <li><h3>Bring it into Unity</h3><p>Send the asset to the project with no manual conversion.</p></li>
+    <li><h3>Refine and ship</h3><p>Light, animate and optimize it like any other asset.</p></li>
+  </ol>
+</section>
+
+<section class="slide" aria-label="Who benefits">
+  <h2>Built for the people who make worlds.</h2>
+  <div class="cols">
+    <div class="col w"><h3>Game developers</h3><p>Fill levels, prototype faster and give small teams the asset output of a larger studio.</p></div>
+    <div class="col g"><h3>Film and virtual production creators</h3><p>Build sets, props and previs in a real-time engine without waiting on a full asset pipeline.</p></div>
+    <div class="col"><h3>Both</h3><p>One consistent way to go from concept to usable art, inside tools they already know.</p></div>
+  </div>
+</section>
+
+<section class="slide" aria-label="Next steps">
+  <h2>Let's close the gap together.</h2>
+  <p class="lede">Proposed next step: a joint pilot connecting Meshy generation to the Unity workflow.</p>
+  <p class="contact">Your name · you@company.com</p>
+  <p class="note">Edit the text in index.html to add your own details, metrics and contact info.</p>
+</section>
+
+</main>
+
+<nav class="bar" aria-label="Slide navigation">
+  <button id="prev" aria-label="Previous slide">&#8249;</button>
+  <div class="prog" aria-hidden="true"><i id="fill"></i></div>
+  <span class="count" id="count">1 / 6</span>
+  <button id="next" aria-label="Next slide">&#8250;</button>
+</nav>
+
+<script>
+(function(){
+  var s=[].slice.call(document.querySelectorAll('.slide')),n=s.length,i=0;
+  var fill=document.getElementById('fill'),count=document.getElementById('count');
+  function show(k,upd){
+    i=Math.max(0,Math.min(n-1,k));
+    s.forEach(function(el,j){el.classList.toggle('on',j===i);el.classList.toggle('past',j<i);el.setAttribute('aria-hidden',j!==i)});
+    fill.style.width=((i+1)/n*100)+'%';count.textContent=(i+1)+' / '+n;
+    if(upd!==false){try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+  }
+  function fromHash(){var h=parseInt(location.hash.slice(1),10);return isNaN(h)?0:h-1}
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  document.getElementById('next').onclick=function(){show(i+1)};
+  document.addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey)return;
+    var k=e.key;
+    if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();show(i+1)}
+    else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();show(i-1)}
+    else if(k==='Home'){show(0)}else if(k==='End'){show(n-1)}
+  });
+  var x0=null,y0=null;
+  document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(x0===null)return;
+    var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)show(i+(dx<0?1:-1));
+    x0=null;
+  },{passive:true});
+  window.addEventListener('hashchange',function(){show(fromHash(),false)});
+  show(fromHash(),false);
+})();
+</script>
 </body>
 </html>
