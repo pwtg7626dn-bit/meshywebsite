@@ -1,202 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Unity × Meshy: production-ready 3D, generated</title>
-<meta name="description" content="A partnership pitch: Unity's engine with Meshy's AI 3D asset generation, for game developers and film creators.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unity × Meshy: generative 3D inside every Unity seat</title>
+<meta name="description" content="A partnership proposal: Meshy.ai's generative 3D stack for Unity enterprise seat licenses.">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --clay:#e6e8ea; --clay-2:#d6d9dd; --paper:#f4f5f6;
-  --ink:#171a1f; --ink-2:#4a515b;
-  --wire:#2e4bff; --gizmo:#f2b632;
-  --head:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
-  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
-  box-sizing:border-box;
-}
-@media (prefers-color-scheme:dark){
-  :root{--clay:#14171b; --clay-2:#262b32; --paper:#1c2026; --ink:#eceef0; --ink-2:#a2a9b3; --wire:#7d92ff}
-}
-*,*::before,*::after{box-sizing:inherit}
-html,body{height:100%;margin:0}
-body{background:var(--clay);color:var(--ink);font:400 clamp(1rem,1.5vw,1.25rem)/1.55 var(--body);overflow:hidden}
-.deck{position:fixed;inset:0}
-.slide{position:absolute;inset:0;padding:clamp(1.5rem,6vh,4rem) clamp(1.25rem,7vw,7rem) 5.5rem;display:flex;flex-direction:column;justify-content:center;overflow-y:auto;opacity:0;visibility:hidden;transform:translateX(24px);transition:opacity .35s,transform .35s,visibility 0s .35s}
-.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .35s,transform .35s}
-.slide.past{transform:translateX(-24px)}
-h1,h2,h3{font-family:var(--head);margin:0;line-height:1.02;letter-spacing:-.02em}
-h1{font-size:clamp(2.6rem,8vw,6.5rem);font-weight:700}
-h2{font-size:clamp(2rem,4.8vw,3.9rem);font-weight:700;max-width:18ch}
-h3{font-size:clamp(1.15rem,1.8vw,1.5rem);font-weight:500;letter-spacing:-.01em;line-height:1.2}
-p{margin:0;max-width:56ch;color:var(--ink-2)}
-.lede{font-size:clamp(1.1rem,1.9vw,1.6rem);line-height:1.4;color:var(--ink);max-width:34ch;margin-top:1.25rem}
-.x{color:var(--wire);font-weight:500}
-.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:clamp(1.25rem,3vw,3rem);margin-top:clamp(1.5rem,5vh,3.5rem)}
-.col{border-top:3px solid var(--ink);padding-top:1rem}
-.col h3{margin-bottom:.5rem}
-.col.w{border-color:var(--wire)}.col.g{border-color:var(--gizmo)}
+:root{--bk:#000;--ink:#111;--mut:#5d636b;--bg:#fff;--card:#f3f4f5;--ln:#dcdfe2;--ac:#2e4bff;--hd:"Aria",Arial,"Helvetica Neue",Helvetica,sans-serif;--bd:"Instrument Sans","Helvetica Neue",Arial,sans-serif;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;font:400 1.05rem/1.6 var(--bd);color:var(--ink);background:var(--bg)}
+h1,h2,h3{font-family:var(--hd);letter-spacing:-.02em;line-height:1.05;margin:0}
+h1{font-size:clamp(2.6rem,7vw,5.6rem)}h2{font-size:clamp(2rem,4.5vw,3.5rem);max-width:20ch}h3{font-size:1.3rem;line-height:1.2}
+p{margin:0}.w{max-width:72rem;margin:0 auto;padding:0 1.25rem}section{padding:clamp(3.5rem,9vw,7rem) 0}
+.mut{color:var(--mut)}.sub{font-family:var(--hd);margin-top:1rem;max-width:52ch;color:var(--mut);font-size:1.15rem}
+nav{position:sticky;top:0;z-index:9;background:#000;color:#fff}nav .w{display:flex;align-items:center;gap:1.5rem;height:3.5rem}
+nav b{font:700 1.1rem var(--hd);margin-right:auto}nav a{color:#ffffffbb;text-decoration:none;font-size:.9rem}nav a:hover,nav a.on{color:#fff}
+.pill{display:inline-block;border:0;border-radius:99px;padding:.7rem 1.4rem;font:500 1rem var(--bd);cursor:pointer;background:#fff;color:#000;text-decoration:none}
+.pill.dk{background:#000;color:#fff}.pill.ol{background:none;color:inherit;border:1px solid currentColor}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.hero{background:#000;color:#fff;padding:clamp(3rem,8vw,6rem) 0}.hero .g{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center}
+.hero p.sub{color:#ffffffaa}.btns{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem}.x{color:#8d9dff}
+.gen{background:#0f1114;border:1px solid #2a2f36;border-radius:14px;padding:1.25rem}
+.gen svg{width:100%;height:auto;display:block}.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+.chip{border:1px solid #3a414a;background:none;color:#fff;border-radius:99px;padding:.35rem .9rem;font:400 .9rem var(--bd);cursor:pointer}
+.chip[aria-pressed=true]{background:#fff;color:#000}.bar{height:4px;background:#2a2f36;border-radius:2px;overflow:hidden;margin-top:.75rem}.bar i{display:block;height:100%;width:0;background:#8d9dff}
+.st{font-size:.85rem;color:#ffffff99;margin-top:.5rem;min-height:1.3em}
+.tri{opacity:0;transition:opacity .5s}.tri.on{opacity:1}.wf{fill:none;stroke:#fff;stroke-width:1.5;stroke-linejoin:round;opacity:.8}
+.fl{display:flex;gap:.5rem;margin:1.5rem 0;flex-wrap:wrap}.fl .chip{border-color:var(--ln);color:var(--ink)}.fl .chip[aria-pressed=true]{background:#000;color:#fff}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:1rem}
+.card{background:var(--card);border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:.4rem}
+.card .n{font:700 2.6rem/1 var(--hd)}.card small{color:var(--mut);margin-top:auto;padding-top:.6rem;font-size:.8rem}.tag{font-size:.75rem;font-weight:500;color:var(--ac)}
+.tabs{display:flex;gap:.5rem;margin:1.5rem 0 1rem}.tabs button{flex:0 0 auto}
+.panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1rem}
+.n2{font:700 clamp(1.7rem,3vw,2.3rem)/1.1 var(--hd);margin:.2rem 0 .5rem}.panel div{border-top:3px solid #000;padding-top:.75rem}.panel h3{margin-bottom:.35rem}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+.calc label{display:block;margin-bottom:1.1rem;font-size:.95rem}.calc label span{float:right;font-weight:500}
+input[type=range]{width:100%;accent-color:#000}
+.out{background:#000;color:#fff;border-radius:14px;padding:1.5rem;align-self:start}.out .n{font:700 clamp(2.4rem,5vw,3.6rem)/1 var(--hd)}.out p{color:#ffffffaa;margin-bottom:1rem}
+.note{font-size:.85rem;color:var(--mut);margin-top:1rem}.out .note{color:#ffffff88}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;margin-top:1.5rem}
+.opt{text-align:left;background:var(--card);border:2px solid transparent;border-radius:12px;padding:1.25rem;cursor:pointer;font:inherit;color:inherit}
+.opt[aria-pressed=true]{border-color:#000;background:#fff}.det{margin-top:1.25rem;padding:1.5rem;background:#000;color:#fff;border-radius:14px}.det ul{margin:.75rem 0 0;padding-left:1.1rem;color:#ffffffcc}
+.cta{background:#000;color:#fff;text-align:center}.cta h2{margin:0 auto}.cta .btns{justify-content:center}
+details{border-top:1px solid var(--ln);padding:.9rem 0}summary{cursor:pointer;font-weight:500}details a{color:var(--ac);word-break:break-all;font-size:.9rem;display:block;margin-top:.3rem}
+footer{padding:2rem 0;font-size:.85rem;color:var(--mut)}
+@media(max-width:800px){.hero .g,.calc{grid-template-columns:1fr}nav a{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tri{transition:none}}
+</style></head><body>
+<nav><div class="w"><b>Unity <span class="x">×</span> Meshy</b><a href="#meshy">Meshy</a><a href="#data">Data</a><a href="#try">Try it</a><a href="#workflow">Workflows</a><a href="#roi">ROI</a><a href="#model">Model</a><a href="#revenue">Revenue</a><a class="pill dk" style="background:#fff;color:#000;padding:.4rem 1rem" href="#ask">The ask</a></div></nav>
 
-/* title slide */
-.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:2rem}
-.hero svg{width:100%;max-width:30rem;justify-self:center;overflow:visible}
-.wire{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round}
-.dot{fill:var(--paper);stroke:var(--wire);stroke-width:2}
-.f{opacity:0}
-.on .f{animation:shade .9s ease-out forwards;animation-delay:calc(.5s + var(--i)*.14s)}
-@keyframes shade{to{opacity:1}}
+<header class="hero"><div class="w g"><div>
+<h1>Generative 3D, built into every Unity seat.</h1>
+<p class="sub">Give Unity enterprise seat licenses access to Meshy's tech stack, so teams making games and video can generate production-ready art assets inside the engine.</p>
+<div class="btns"><a class="pill" href="#try">Try the workflow</a><a class="pill ol" href="#roi">Size the opportunity</a></div></div>
+<div class="gen" aria-label="Illustrative generator">
+<svg id="sv" viewBox="0 0 400 340" role="img" aria-label="Low-poly model that fills in when generated"></svg>
+<div class="chips" id="pr" role="group" aria-label="Prompt"></div>
+<button class="pill" id="go">Generate</button><div class="bar"><i id="pg"></i></div><div class="st" id="st">Illustration only. Pick a prompt and generate.</div></div></div></header>
 
-/* partnership diagram */
-.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(1rem,3vw,2.5rem);align-items:stretch;margin-top:clamp(1.5rem,5vh,3rem)}
-.box{background:var(--paper);border-radius:6px;padding:clamp(1.1rem,2.4vw,2rem)}
-.box h3{font-size:clamp(1.5rem,2.8vw,2.4rem);margin-bottom:.6rem;color:var(--ink)}
-.plus{align-self:center;font:700 clamp(2rem,4vw,3.5rem)/1 var(--head);color:var(--wire)}
-.result{margin-top:1.5rem;padding:1rem 0 0;border-top:3px solid var(--wire);color:var(--ink);font-size:clamp(1.1rem,1.9vw,1.5rem);line-height:1.35;max-width:40ch}
+<section id="meshy" style="background:var(--card)"><div class="w"><h2>Meet Meshy.</h2>
+<p class="sub">A generative 3D company founded in 2021 by Dr. Ethan Hu. Its pipeline spans text and image to 3D, texturing, texture editing and animation rigging, and Meshy names Meta, Square Enix and DeepMind among its enterprise users.</p>
+<div class="panel" style="margin-top:2rem">
+<div><span class="tag">Latest round</span><div class="n2">$400M Series B</div><p class="mut">Announced July 21, 2026. Co-led by IDG Capital, Matrix Partners China and Monolith, with Granite Asia, Sequoia China, BAI Capital and Source Code Capital also in.</p></div>
+<div><span class="tag">Valuation</span><div class="n2">$1.5B</div><p class="mut">Post-money, and Meshy's first publicly disclosed valuation. One outlet reported a slightly lower figure.</p></div>
+<div><span class="tag">Company size</span><div class="n2">About 170 people</div><p class="mut">173 as of August 2026 per Tracxn. Other trackers list 142 to 157 earlier in the year.</p></div>
+<div><span class="tag">Where teams are</span><div class="n2">Silicon Valley and China</div><p class="mut">Headquartered in Sunnyvale, California. Careers listings show research and engineering roles in Sunnyvale, Beijing, Shanghai and Shenzhen, plus US remote sales and marketing. No headcount split by site is published.</p></div></div></div></section>
 
-/* workflow */
-.steps{list-style:none;margin:clamp(1.5rem,5vh,3.5rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1.25rem;counter-reset:s}
-.steps li{counter-increment:s;background:var(--paper);border-radius:6px;padding:1.1rem 1.1rem 1.3rem}
-.steps li::before{content:counter(s);display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--ink);color:var(--clay);font:500 .95rem var(--head);margin-bottom:.9rem}
-.steps h3{margin-bottom:.4rem}
-.steps p{font-size:.95em}
+<section id="data"><div class="w"><h2>The numbers behind the case.</h2>
+<p class="sub">Data points from Unity and Meshy sources. Each card names its source and date.</p>
+<div class="fl" id="fl" role="group" aria-label="Filter"><button class="chip" aria-pressed="true" data-f="all">All</button><button class="chip" aria-pressed="false" data-f="Unity">Unity</button><button class="chip" aria-pressed="false" data-f="Meshy">Meshy</button></div>
+<div class="cards" id="cards"></div></div></section>
 
-.note{margin-top:2rem;font-size:.8em;color:var(--ink-2)}
-.contact{margin-top:2rem;font-size:clamp(1.1rem,1.8vw,1.4rem);color:var(--ink)}
+<section id="try" style="background:var(--card)"><div class="w"><h2>The gap, and the fix.</h2>
+<p class="sub">Unity AI is an engine-integrated agent for game development. Meshy already ships a free Unity plugin with a one-click bridge, but it needs an individual Pro account. Seat licenses remove that friction.</p>
+<div class="panel" style="margin-top:2rem"><div><h3>Today</h3><p class="mut">Each artist signs up separately, manages credits, and bridges models by hand.</p></div><div><h3>With the partnership</h3><p class="mut">Seat holders get Meshy generation from their Unity entitlement, with one admin and one invoice.</p></div><div><h3>Result</h3><p class="mut">Assets are generated, imported, refined and shipped in a single pipeline.</p></div></div></div></section>
 
-/* chrome */
-.bar{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;gap:1rem;padding:.9rem clamp(1.25rem,7vw,7rem);background:linear-gradient(transparent,var(--clay) 60%)}
-.prog{flex:1;height:3px;background:var(--clay-2);border-radius:2px;overflow:hidden}
-.prog i{display:block;height:100%;width:0;background:var(--wire);transition:width .35s}
-.count{font:500 .9rem var(--head);color:var(--ink-2);min-width:3.5rem;text-align:right}
-.bar button{appearance:none;border:0;background:var(--paper);color:var(--ink);width:2.5rem;height:2.5rem;border-radius:50%;font:500 1.1rem var(--head);cursor:pointer}
-.bar button:hover{background:var(--clay-2)}
-:focus-visible{outline:3px solid var(--wire);outline-offset:2px}
-@media (max-width:760px){
-  .hero{grid-template-columns:1fr}.hero svg{max-width:14rem;order:-1;justify-self:start}
-  .pair{grid-template-columns:1fr}.plus{justify-self:start}
-}
-@media (prefers-reduced-motion:reduce){
-  .slide,.slide.on,.prog i{transition:none;transform:none}
-  .f{opacity:1}.on .f{animation:none}
-}
-</style>
-</head>
-<body>
-<main class="deck" id="deck" aria-live="polite">
+<section id="workflow"><div class="w"><h2>One stack, two industries.</h2>
+<div class="tabs" role="tablist"><button class="pill dk" role="tab" aria-selected="true" data-t="g">Games</button><button class="pill ol" role="tab" aria-selected="false" data-t="f">Film and video</button></div>
+<div class="panel" id="pn"></div></div></section>
 
-<section class="slide" aria-label="Title">
-  <div class="hero">
-    <div>
-      <h1>Production-ready 3D, generated.</h1>
-      <p class="lede">Unity <span class="x">×</span> Meshy.ai: best-in-class 3D art assets for game developers and film creators.</p>
-    </div>
-    <svg viewBox="0 0 400 400" role="img" aria-label="A low-poly cube that fills in from wireframe to shaded model">
-      <g>
-        <polygon class="f" style="--i:0" fill="#e9edff" points="200,60 320,130 200,200"/>
-        <polygon class="f" style="--i:1" fill="#c9d2ff" points="200,60 200,200 80,130"/>
-        <polygon class="f" style="--i:2" fill="#8da0ff" points="80,130 200,200 80,270"/>
-        <polygon class="f" style="--i:3" fill="#5a73ff" points="80,270 200,200 200,340"/>
-        <polygon class="f" style="--i:4" fill="#2e4bff" points="200,340 200,200 320,270"/>
-        <polygon class="f" style="--i:5" fill="#f2b632" points="320,270 200,200 320,130"/>
-      </g>
-      <g class="wire">
-        <polygon points="200,60 320,130 320,270 200,340 80,270 80,130"/>
-        <polyline points="80,130 200,200 320,130"/><line x1="200" y1="200" x2="200" y2="340"/>
-        <line x1="200" y1="60" x2="200" y2="200"/><line x1="320" y1="130" x2="200" y2="200"/>
-        <line x1="320" y1="270" x2="200" y2="200"/><line x1="80" y1="270" x2="200" y2="200"/>
-      </g>
-      <g class="dot"><circle cx="200" cy="60" r="5"/><circle cx="320" cy="130" r="5"/><circle cx="320" cy="270" r="5"/><circle cx="200" cy="340" r="5"/><circle cx="80" cy="270" r="5"/><circle cx="80" cy="130" r="5"/><circle cx="200" cy="200" r="5"/></g>
-    </svg>
-  </div>
-</section>
+<section id="roi" style="background:var(--card)"><div class="w"><h2>Size the value for your teams.</h2>
+<p class="sub">Move the sliders. These are your own assumptions, not Unity or Meshy figures.</p>
+<div class="calc"><div>
+<label>Enterprise seats using it <span id="v1"></span><input id="i1" type="range" min="50" max="5000" step="50" value="500"></label>
+<label>Assets per seat each month <span id="v2"></span><input id="i2" type="range" min="1" max="40" value="10"></label>
+<label>Share made with AI assist <span id="v3"></span><input id="i3" type="range" min="5" max="100" step="5" value="30"></label>
+<label>Hours per asset, by hand <span id="v4"></span><input id="i4" type="range" min="1" max="24" value="6"></label>
+<label>Cleanup hours per AI asset <span id="v5"></span><input id="i5" type="range" min="0" max="8" step=".5" value="1.5"></label>
+<label>Loaded cost per hour <span id="v6"></span><input id="i6" type="range" min="30" max="150" step="5" value="60"></label></div>
+<div class="out"><p>Estimated annual art time recovered</p><div class="n" id="o1"></div><p id="o2" style="margin-top:.5rem"></p><div class="n" id="o3" style="font-size:2rem"></div><p>assets generated per year</p><div class="note">Before license costs. A model for discussion only.</div></div></div></div></section>
 
-<section class="slide" aria-label="The gap">
-  <h2>Generative AI can make 3D. It can't yet make it ready to ship.</h2>
-  <div class="cols">
-    <div class="col"><h3>Looks right, builds wrong</h3><p>Raw AI meshes often arrive with messy topology and unusable surfaces, so artists rebuild them by hand.</p></div>
-    <div class="col"><h3>Outside the pipeline</h3><p>Assets are generated away from the engine, then converted, retextured and fixed before anyone can use them.</p></div>
-    <div class="col"><h3>Quality bar is high</h3><p>Games and film need consistent, performant, art-directed assets. Novelty isn't enough.</p></div>
-  </div>
-</section>
+<section id="model"><div class="w"><h2>Three ways to partner.</h2>
+<div class="opts" id="op"></div><div class="det" id="dt"></div></div></section>
 
-<section class="slide" aria-label="The partnership">
-  <h2>Two strengths, one pipeline.</h2>
-  <div class="pair">
-    <div class="box"><h3>Meshy.ai</h3><p>Generates high-quality 3D art assets from text and images, fast.</p></div>
-    <div class="plus" aria-hidden="true">+</div>
-    <div class="box"><h3>Unity</h3><p>The game engine where assets are placed, lit, animated, optimized and shipped.</p></div>
-  </div>
-  <p class="result">Best-in-class 3D assets, generated and used in the same place.</p>
-</section>
+<section id="revenue" style="background:var(--card)"><div class="w"><h2>A new revenue line beyond enterprise.</h2>
+<p class="sub">Meshy's Unity bridge today is limited to Pro members and above. Open it to everyone else: non-enterprise Unity users buy credits or order custom art assets, generated with Meshy tech and delivered into their project.</p>
+<div class="panel" style="margin-top:2rem"><div><h3>Buy where they already shop</h3><p class="mut">Credit packs and per-asset orders sold through the Unity Asset Store and the Editor.</p></div><div><h3>Custom, not catalog</h3><p class="mut">Users describe the exact asset they need instead of searching for something close.</p></div><div><h3>Share the upside</h3><p class="mut">Unity earns on every order, and Meshy earns on usage of its stack.</p></div></div>
+<div class="calc"><div>
+<label>Asset Store revenue baseline <span id="r1v"></span><input id="r1" type="range" min="10" max="300" step="1" value="83"></label>
+<label>New stream as share of baseline <span id="r2v"></span><input id="r2" type="range" min="5" max="100" step="5" value="30"></label>
+<p class="note" style="margin-top:0">Unity does not publish a standalone Asset Store revenue figure. The default uses the roughly $82.7M that Unity's FY2022 10-K reports for Strategic Partnerships and Other, the line that includes the Asset Store, as a proxy. Replace it with Unity's internal number.</p></div>
+<div class="out"><p>Estimated annual revenue from the new stream</p><div class="n" id="r3"></div><p id="r4" style="margin-top:.5rem"></p><p id="r5"></p><div class="note">Your assumptions, for discussion. Not a forecast from Unity or Meshy.</div></div></div></div></section>
 
-<section class="slide" aria-label="How it works">
-  <h2>From idea to in-scene.</h2>
-  <ol class="steps">
-    <li><h3>Describe it</h3><p>Write a prompt or upload a reference image.</p></li>
-    <li><h3>Generate in Meshy</h3><p>Get a textured 3D asset built to a production standard.</p></li>
-    <li><h3>Bring it into Unity</h3><p>Send the asset to the project with no manual conversion.</p></li>
-    <li><h3>Refine and ship</h3><p>Light, animate and optimize it like any other asset.</p></li>
-  </ol>
-</section>
+<section class="cta" id="ask"><div class="w"><h2>Put Meshy in every seat.</h2>
+<p class="sub" style="margin:1rem auto;color:#ffffffaa">Proposed next step: a joint enterprise pilot with a small group of Unity customers in games and video production.</p>
+<div class="btns"><a class="pill" href="mailto:you@company.com">Start the conversation</a><a class="pill ol" href="deck.html">View the deck</a></div></div></section>
 
-<section class="slide" aria-label="Who benefits">
-  <h2>Built for the people who make worlds.</h2>
-  <div class="cols">
-    <div class="col w"><h3>Game developers</h3><p>Fill levels, prototype faster and give small teams the asset output of a larger studio.</p></div>
-    <div class="col g"><h3>Film and virtual production creators</h3><p>Build sets, props and previs in a real-time engine without waiting on a full asset pipeline.</p></div>
-    <div class="col"><h3>Both</h3><p>One consistent way to go from concept to usable art, inside tools they already know.</p></div>
-  </div>
-</section>
-
-<section class="slide" aria-label="Next steps">
-  <h2>Let's close the gap together.</h2>
-  <p class="lede">Proposed next step: a joint pilot connecting Meshy generation to the Unity workflow.</p>
-  <p class="contact">Your name · you@company.com</p>
-  <p class="note">Edit the text in index.html to add your own details, metrics and contact info.</p>
-</section>
-
-</main>
-
-<nav class="bar" aria-label="Slide navigation">
-  <button id="prev" aria-label="Previous slide">&#8249;</button>
-  <div class="prog" aria-hidden="true"><i id="fill"></i></div>
-  <span class="count" id="count">1 / 6</span>
-  <button id="next" aria-label="Next slide">&#8250;</button>
-</nav>
+<section style="padding:2rem 0"><div class="w"><details><summary>Sources and data notes</summary>
+<p class="note">Some figures come from secondary coverage of company statements or older Unity reporting (dates shown on cards). Verify against current Unity and Meshy releases before presenting.</p>
+<a href="https://www.roic.ai/quote/U/transcripts/2026-year/1-quarter">Unity Q1 2026 earnings call transcript</a>
+<a href="https://gamesbeat.com/?p=195682">GamesBeat: Unity top-1,000 mobile share (Q4 2020)</a>
+<a href="https://www.cyberdb.co/ai-vendor/unity/">Unity monthly active end users (Q4 2021)</a>
+<a href="https://yespress.io/meshyai.md">Meshy users, models and products (Jul 2026)</a>
+<a href="https://docs.meshy.ai/">Meshy documentation</a>
+<a href="https://siliconvalleyinvestclub.com/2026/07/23/meshy-raises-400-million-at-a-1-5-billion-valuation/">Meshy Series B coverage (Jul 2026)</a>
+<a href="https://tracxn.com/d/companies/meshy/__iJd8EZ6tFhN-8VMLbTtjqZaCeWONKfPT1QNk7YpTpV8">Tracxn: Meshy funding and headcount</a>
+<a href="https://meshy.ai/careers">Meshy careers: team locations</a>
+<a href="https://www.sec.gov/Archives/edgar/data/1810806/000181080623000016/unity-20221231.htm">Unity FY2022 Form 10-K (Strategic Partnerships and Other)</a>
+<a href="https://docs.meshy.ai/en/unity-plugin/bridge-to-unity">Meshy Unity plugin: Bridge to Unity</a></details></div></section>
+<footer><div class="w">Concept page for partnership discussion. Unity and Meshy are trademarks of their owners; not affiliated or endorsed.</div></footer>
 
 <script>
-(function(){
-  var s=[].slice.call(document.querySelectorAll('.slide')),n=s.length,i=0;
-  var fill=document.getElementById('fill'),count=document.getElementById('count');
-  function show(k,upd){
-    i=Math.max(0,Math.min(n-1,k));
-    s.forEach(function(el,j){el.classList.toggle('on',j===i);el.classList.toggle('past',j<i);el.setAttribute('aria-hidden',j!==i)});
-    fill.style.width=((i+1)/n*100)+'%';count.textContent=(i+1)+' / '+n;
-    if(upd!==false){try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
-  }
-  function fromHash(){var h=parseInt(location.hash.slice(1),10);return isNaN(h)?0:h-1}
-  document.getElementById('prev').onclick=function(){show(i-1)};
-  document.getElementById('next').onclick=function(){show(i+1)};
-  document.addEventListener('keydown',function(e){
-    if(e.metaKey||e.ctrlKey||e.altKey)return;
-    var k=e.key;
-    if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();show(i+1)}
-    else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();show(i-1)}
-    else if(k==='Home'){show(0)}else if(k==='End'){show(n-1)}
-  });
-  var x0=null,y0=null;
-  document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
-  document.addEventListener('touchend',function(e){
-    if(x0===null)return;
-    var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
-    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)show(i+(dx<0?1:-1));
-    x0=null;
-  },{passive:true});
-  window.addEventListener('hashchange',function(){show(fromHash(),false)});
-  show(fromHash(),false);
-})();
-</script>
-</body>
-</html>
+var $=function(s){return document.querySelector(s)};
+/* data cards */
+var D=[["Unity",90,"%","of game developers already use AI in their workflows","Unity research, Q1 2026 earnings call"],["Unity",12,"%","quarter-on-quarter rise in newly published Made with Unity games","Q1 2026 earnings call"],["Unity",20,"%","quarter-on-quarter growth in new Unity sign-ups, fastest since 2020","Q1 2026 earnings call"],["Unity",71,"%","of the top 1,000 mobile games were made with Unity","Unity, Q4 2020"],["Unity",3.9,"B","monthly active end users of Unity-made content","Unity, Q4 2021"],["Meshy",12,"M+","registered users","Meshy Series B coverage, Jul 2026"],["Meshy",100,"M+","3D models created on the platform","Meshy Series B coverage, Jul 2026"],["Meshy",6,"","export formats: GLB, FBX, OBJ, STL, USDZ, 3MF","Meshy documentation"],["Meshy",1,"min","from text, image or sketch to a 3D model, per Meshy","Meshy marketing, 2026"]];
+$("#cards").innerHTML=D.map(function(d){return '<div class="card" data-s="'+d[0]+'"><span class="tag">'+d[0]+'</span><div class="n" data-n="'+d[1]+'" data-x="'+d[2]+'">0'+d[2]+'</div><p>'+d[3]+'</p><small>'+d[4]+'</small></div>'}).join("");
+function cnt(e){var n=+e.dataset.n,x=e.dataset.x,t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/900),v=n*(1-Math.pow(1-p,3));e.textContent=(n%1?v.toFixed(1):Math.round(v))+x;if(p<1)requestAnimationFrame(f)})(t0)}
+var io=new IntersectionObserver(function(a){a.forEach(function(x){if(x.isIntersecting){cnt(x.target);io.unobserve(x.target)}})},{threshold:.5});
+document.querySelectorAll(".n[data-n]").forEach(function(e){io.observe(e)});
+$("#fl").onclick=function(e){var b=e.target.closest("button");if(!b)return;document.querySelectorAll("#fl button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});document.querySelectorAll(".card").forEach(function(c){c.style.display=(b.dataset.f==="all"||c.dataset.s===b.dataset.f)?"":"none"})};
+/* generator */
+var P=[{n:"Stone golem",c:["#e8e8e8","#c9c9c9","#a3a3a3","#7d7d7d","#575757","#f2b632"]},{n:"Neon crate",c:["#e9edff","#c9d2ff","#8da0ff","#5a73ff","#2e4bff","#ff5fa2"]},{n:"Moss cube",c:["#e5f6df","#bfe5b0","#8fcf78","#5fae4a","#3a8030","#f2b632"]}];
+var T=[[200,40,320,110,200,180],[200,40,200,180,80,110],[80,110,200,180,80,250],[80,250,200,180,200,320],[200,320,200,180,320,250],[320,250,200,180,320,110]],cur=0,busy=false;
+function draw(){var h="";T.forEach(function(t,i){h+='<polygon class="tri" data-i="'+i+'" fill="'+P[cur].c[i]+'" points="'+t.join(",")+'"/>'});h+='<polygon class="wf" points="200,40 320,110 320,250 200,320 80,250 80,110"/><polyline class="wf" points="80,110 200,180 320,110"/><line class="wf" x1="200" y1="180" x2="200" y2="320"/><line class="wf" x1="200" y1="40" x2="200" y2="180"/>';$("#sv").innerHTML=h}
+$("#pr").innerHTML=P.map(function(p,i){return '<button class="chip" aria-pressed="'+(i==0)+'" data-i="'+i+'">'+p.n+'</button>'}).join("");
+$("#pr").onclick=function(e){var b=e.target.closest("button");if(!b||busy)return;cur=+b.dataset.i;document.querySelectorAll("#pr button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});draw();$("#st").textContent="Ready to generate: "+P[cur].n}
+$("#go").onclick=function(){if(busy)return;busy=true;draw();var M=["Generating mesh","Retopologizing","Texturing (PBR)","Sending to Unity"],t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/2200);$("#pg").style.width=p*100+"%";$("#st").textContent=M[Math.min(3,Math.floor(p*4))]+"...";document.querySelectorAll(".tri").forEach(function(e){if(p>(+e.dataset.i+1)/7)e.classList.add("on")});if(p<1)requestAnimationFrame(f);else{document.querySelectorAll(".tri").forEach(function(e){e.classList.add("on")});$("#st").textContent="In your Unity scene. Illustration only.";busy=false}})(t0)};
+draw();
+/* tabs */
+var TB={g:[["Fill worlds","Generate props, characters and environment pieces from text or images, then place them in scenes."],["Prototype fast","Block out levels with real-looking art on day one, then swap in hero assets later."],["Ship to every platform","Export to FBX or GLB and optimize with the tools teams already use in Unity."]],f:[["Build sets and props","Create assets for virtual production and real-time sets without a full modeling queue."],["Previs in the engine","Test camera, light and layout in real time with generated stand-ins."],["Keep it consistent","Texture and refine assets to match a look, then reuse them across shots."]]};
+function tab(k){$("#pn").innerHTML=TB[k].map(function(r){return "<div><h3>"+r[0]+"</h3><p class='mut'>"+r[1]+"</p></div>"}).join("");document.querySelectorAll(".tabs button").forEach(function(b){var on=b.dataset.t===k;b.setAttribute("aria-selected",on);b.className="pill "+(on?"dk":"ol")})}
+document.querySelector(".tabs").onclick=function(e){var b=e.target.closest("button");if(b)tab(b.dataset.t)};tab("g");
+/* roi */
+var F=function(n){return Math.round(n).toLocaleString("en-US")};
+function roi(){var v=[1,2,3,4,5,6].map(function(i){return +$("#i"+i).value}),s=v[0],a=v[1],sh=v[2]/100,m=v[3],c=v[4],r=v[5];
+$("#v1").textContent=F(s);$("#v2").textContent=a;$("#v3").textContent=v[2]+"%";$("#v4").textContent=m+" h";$("#v5").textContent=c+" h";$("#v6").textContent="$"+r;
+var n=s*a*12*sh,h=Math.max(0,n*(m-c));$("#o1").textContent=F(h)+" hours";$("#o2").textContent="Worth about $"+F(h*r)+" a year at your rate";$("#o3").textContent=F(n)}
+document.querySelectorAll("input[type=range]").forEach(function(i){i.oninput=roi});roi();
+/* models */
+var O=[["Meshy for Unity, bundled","Seat holders get the existing plugin and bridge, with Meshy Pro entitlement included.",["Fastest to launch","Builds on the current Meshy for Unity plugin","Single admin and invoice"]],["Editor-native generation","Meshy's generation lives inside the Unity Editor alongside Unity AI.",["Generate, texture and animate without leaving the Editor","Meshy API covers text to 3D, image to 3D, texturing, remeshing and animation","Agent access through Meshy's MCP server"]],["Enterprise suite","Seat-based access plus shared governance for studios and production houses.",["Central credits and usage reporting","Team libraries of approved assets","Joint support and roadmap"]]];
+$("#op").innerHTML=O.map(function(o,i){return '<button class="opt" data-i="'+i+'" aria-pressed="'+(i==0)+'"><h3>'+o[0]+'</h3><p class="mut" style="margin-top:.4rem">'+o[1].split(",")[0]+'</p></button>'}).join("");
+function opt(i){var o=O[i];$("#dt").innerHTML="<h3>"+o[0]+"</h3><p style='color:#ffffffbb;margin-top:.5rem'>"+o[1]+"</p><ul>"+o[2].map(function(x){return "<li>"+x+"</li>"}).join("")+"</ul>";document.querySelectorAll(".opt").forEach(function(b,j){b.setAttribute("aria-pressed",j===i)})}
+$("#op").onclick=function(e){var b=e.target.closest("button");if(b)opt(+b.dataset.i)};opt(0);
+/* revenue */
+function rev(){var b=+$("#r1").value,p=+$("#r2").value,r=b*p/100,M=function(n){return "$"+n.toFixed(1)+"M"};
+$("#r1v").textContent="$"+b+"M";$("#r2v").textContent=p+"%";$("#r3").textContent=M(r);
+$("#r4").textContent="About "+M(r/12)+" a month, from "+p+"% of a $"+b+"M baseline";
+$("#r5").textContent="Range: "+M(b*.15)+" at 15%, "+M(b*.45)+" at 45%"}
+$("#r1").oninput=rev;$("#r2").oninput=rev;rev();
+/* scroll spy */
+var L=[].slice.call(document.querySelectorAll("nav a[href^='#']")),sp=new IntersectionObserver(function(a){a.forEach(function(x){if(x.isIntersecting)L.forEach(function(l){l.classList.toggle("on",l.getAttribute("href")==="#"+x.target.id)})})},{rootMargin:"-40% 0px -55% 0px"});
+document.querySelectorAll("section[id]").forEach(function(s){sp.observe(s)});
+</script></body></html>
