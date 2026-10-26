@@ -28,7 +28,7 @@ nav b{font:700 1.1rem var(--hd);margin-right:auto}nav a{color:#ffffffbb;text-dec
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:1rem}
 .card{background:var(--card);border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:.4rem}
 .card .n{font:700 2.6rem/1 var(--hd)}.card small{color:var(--mut);margin-top:auto;padding-top:.6rem;font-size:.8rem}.tag{font-size:.75rem;font-weight:500;color:var(--ac)}
-.tabs{display:flex;gap:.5rem;margin:1.5rem 0 1rem}.tabs button{flex:0 0 auto}
+
 .panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1rem}
 .n2{font:700 clamp(1.7rem,3vw,2.3rem)/1.1 var(--hd);margin:.2rem 0 .5rem}.panel div{border-top:3px solid #000;padding-top:.75rem}.panel h3{margin-bottom:.35rem}
 .calc{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
@@ -45,7 +45,7 @@ footer{padding:2rem 0;font-size:.85rem;color:var(--mut)}
 @media(max-width:800px){.hero .g,.calc{grid-template-columns:1fr}nav a{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tri{transition:none}}
 </style></head><body>
-<nav><div class="w"><b>Unity <span class="x">×</span> Meshy</b><a href="#meshy">Meshy</a><a href="#data">Data</a><a href="#try">Why</a><a href="#workflow">Workflows</a><a href="#value">Value</a><a href="#model">Model</a><a href="#revenue">Revenue</a><a class="pill dk" style="background:#fff;color:#000;padding:.4rem 1rem" href="#ask">The ask</a></div></nav>
+<nav><div class="w"><b>Unity <span class="x">×</span> Meshy</b><a href="#meshy">Meshy</a><a href="#data">Data</a><a href="#try">Why</a><a href="#value">Value</a><a href="#model">Model</a><a href="#revenue">Revenue</a><a class="pill dk" style="background:#fff;color:#000;padding:.4rem 1rem" href="#ask">The ask</a></div></nav>
 
 <header class="hero"><div class="w g"><div>
 <h1>Generative 3D art and animation, built into every Unity seat.</h1>
@@ -81,10 +81,6 @@ footer{padding:2rem 0;font-size:.85rem;color:var(--mut)}
 <p class="sub">Unity AI is an engine-integrated agent for game development. Meshy already ships a free Unity plugin with a one-click bridge, but it needs an individual Pro account. Seat licenses remove that friction.</p>
 <div class="panel" style="margin-top:2rem"><div><h3>Today</h3><p class="mut">Each artist signs up separately, manages credits, and bridges models by hand.</p></div><div><h3>With the partnership</h3><p class="mut">Seat holders get Meshy generation from their Unity entitlement, with one admin and one invoice.</p></div><div><h3>Result</h3><p class="mut">Assets are generated, imported, refined and shipped in a single pipeline.</p></div></div></div></section>
 
-<section id="workflow"><div class="w"><h2>One stack, two industries.</h2>
-<div class="tabs" role="tablist"><button class="pill dk" role="tab" aria-selected="true" data-t="g">Games</button><button class="pill ol" role="tab" aria-selected="false" data-t="f">Film and video</button></div>
-<div class="panel" id="pn"></div></div></section>
-
 <section id="value" style="background:var(--card)"><div class="w"><h2 style="max-width:26ch">Value of the partnership: quantifying the opportunity.</h2>
 <div class="tw"><table class="tbl"><thead><tr><th>Monthly revenue model</th><th>2027</th><th>2030</th></tr></thead><tbody>
 <tr><td>Unity Editor monthly active users</td><td>1,500,000</td><td>3,000,000</td></tr>
@@ -116,7 +112,7 @@ footer{padding:2rem 0;font-size:.85rem;color:var(--mut)}
 <p class="note" style="margin-top:0">Unity does not publish a standalone Asset Store revenue figure. The default uses the roughly $82.7M that Unity's FY2022 10-K reports for Strategic Partnerships and Other, the line that includes the Asset Store, as a proxy. Replace it with Unity's internal number.</p></div>
 <div class="out"><p>Estimated annual revenue from the new stream</p><div class="n" id="r3"></div><p id="r4" style="margin-top:.5rem"></p><p id="r5"></p><div class="note">Your assumptions, for discussion. Not a forecast from Unity or Meshy.</div></div></div></div></section>
 
-<section class="cta" id="ask"><div class="w"><h2>Put Meshy in every seat.</h2>
+<section class="cta" id="ask"><div class="w"><h2>Put Meshy in every Unity seat.</h2>
 <p class="sub" style="margin:1rem auto;color:#ffffffaa">Proposed next step: a joint enterprise pilot with a small group of Unity customers in games and video production.</p>
 <div class="btns"><a class="pill" href="mailto:you@company.com">Start the conversation</a><a class="pill ol" href="deck.html">View the deck</a></div></div></section>
 
@@ -152,10 +148,6 @@ $("#pr").innerHTML=P.map(function(p,i){return '<button class="chip" aria-pressed
 $("#pr").onclick=function(e){var b=e.target.closest("button");if(!b||busy)return;cur=+b.dataset.i;document.querySelectorAll("#pr button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});draw();$("#st").textContent="Ready to generate: "+P[cur].n}
 $("#go").onclick=function(){if(busy)return;busy=true;draw();var M=["Generating mesh","Retopologizing","Texturing (PBR)","Sending to Unity"],t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/2200);$("#pg").style.width=p*100+"%";$("#st").textContent=M[Math.min(3,Math.floor(p*4))]+"...";document.querySelectorAll(".tri").forEach(function(e){if(p>(+e.dataset.i+1)/7)e.classList.add("on")});if(p<1)requestAnimationFrame(f);else{document.querySelectorAll(".tri").forEach(function(e){e.classList.add("on")});$("#st").textContent="In your Unity scene. Illustration only.";busy=false}})(t0)};
 draw();
-/* tabs */
-var TB={g:[["Fill worlds","Generate props, characters and environment pieces from text or images, then place them in scenes."],["Prototype fast","Block out levels with real-looking art on day one, then swap in hero assets later."],["Ship to every platform","Export to FBX or GLB and optimize with the tools teams already use in Unity."]],f:[["Build sets and props","Create assets for virtual production and real-time sets without a full modeling queue."],["Previs in the engine","Test camera, light and layout in real time with generated stand-ins."],["Keep it consistent","Texture and refine assets to match a look, then reuse them across shots."]]};
-function tab(k){$("#pn").innerHTML=TB[k].map(function(r){return "<div><h3>"+r[0]+"</h3><p class='mut'>"+r[1]+"</p></div>"}).join("");document.querySelectorAll(".tabs button").forEach(function(b){var on=b.dataset.t===k;b.setAttribute("aria-selected",on);b.className="pill "+(on?"dk":"ol")})}
-document.querySelector(".tabs").onclick=function(e){var b=e.target.closest("button");if(b)tab(b.dataset.t)};tab("g");
 var F=function(n){return Math.round(n).toLocaleString("en-US")};
 /* value */
 function M(v){return v>=1e6?"$"+(v/1e6).toFixed(2)+"M":"$"+Math.round(v/1e3)+"K"}
